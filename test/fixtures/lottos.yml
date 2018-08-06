@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  totalnum: 1
+  winnum: 1
+  result: MyText
+
+two:
+  totalnum: 1
+  winnum: 1
+  result: MyText

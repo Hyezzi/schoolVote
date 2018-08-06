@@ -1,0 +1,17 @@
+
+<div class="container">
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Studentid:</strong>
+  <%= @vote_log.studentID %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @vote_log.name %>
+</p>
+
+<%= link_to 'Destroy', edit_vote_log_path(@vote_log), class: "searchbtn" %>
+<%= link_to 'Back', vote_logs_path, class: "searchbtn"%>
+</div>

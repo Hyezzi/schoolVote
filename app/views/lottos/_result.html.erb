@@ -1,0 +1,33 @@
+<%= form_for(@lotto) do |f| %>
+    <div class="container-fluid" id = "result">    
+        <div class="row content">
+            
+            <div class="container">
+                <div class="titlel">당첨자 발표</div> 
+            </div>
+
+            <div class="col-8 col-md-10 col-center m-auto text-center" id="winnerbox">
+                <h4 class="lottitle"><br> 축하합니다 :) </h4>
+                       
+
+             
+            <% for n in 0...@lotto.winnum.to_i %>
+                <%@winnerID = $winnerarray[n][0]%>
+
+                <%@imageURL = VoteLog.where(studentID: @winnerID).pluck(:image).to_s%>
+                <%=puts "hi here!!", @imageURL%>
+
+                <%# <%if !@imageURL.nil?%>
+                    <p> <%= @winnerID%></p>
+                <%# <%else%> 
+                    <%# <p><%=@winnerID%>
+                <%# <%end%> 
+            <% end %> 
+            
+                
+                <p> 위 학우들께는 2-3일 내에 응모하신 번호로 문자드립니다. </p>
+            </div>
+
+        </div>
+    </div>
+<% end %>

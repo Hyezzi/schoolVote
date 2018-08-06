@@ -1,0 +1,31 @@
+<head>
+  <style>
+    .Poster {
+      height: auto;
+      width: 100%;
+    }
+  </style>
+</head>
+
+
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+  <table>
+    <tbody>
+      <% @pledgeintros.each do |pledgeintro| %>
+        <tr>
+          <td><%= link_to image_tag("#{pledgeintro.image}", class: "Poster"), pledges_path %></td>
+        </tr>
+    </tbody>
+  </table>
+      <%= link_to '확인', pledgeintro %> |
+      <%= link_to '변경', edit_pledgeintro_path(pledgeintro) %> |
+      <%= link_to '삭제', pledgeintro, method: :delete, data: { confirm: '삭제하시겠습니까?' } %>
+      <% end %>
+
+<br><br>
+
+<%= link_to '선거본부 포스터 등록하기', new_pledgeintro_path %>
+
+</div>

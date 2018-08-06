@@ -1,0 +1,183 @@
+<!--추첨 버튼 누르기 전에는 상단이 보이도록!-->
+
+<div class="container" id="timer">
+  <!--타이머-->
+  <div class="countdown">
+    <ul id = "example">
+      <li class="title"> 결과 발표까지 </li> <br><br>
+      <li><span id="days"></span><p class="days_text">Days</p></li>
+      <li class="seperator">:</li>
+      <li><span id="hours"></span><p class="hours_text">Hours</p></li>
+      <li class="seperator">:</li>
+      <li><span id="minutes"></span><p class="minutes_text">Minutes</p></li>
+      <li class="seperator">:</li>
+      <li><span id="seconds"></span><p class="seconds_text">Seconds</p></li> <br>
+      <li class="title"> 남았습니다. </li> <br><br><br><br>
+      <li><a href="/"style="color:gray"><button type="button" class="btn btn-outline-dark">페이스북 실시간 추첨 확인하러가기</button></a></li>
+    </ul>
+  </div>
+
+</div>
+
+<!--추첨 버튼 이후에는 하단이 보이도록!-->
+<% if !$winnerarray.nil?%>
+  <%puts "$winner array nil???? : ", $winnerarray%>
+  <%= render 'result'%>
+  <%# confetti 테스트 코드 %>
+  <div class="container col-center" id="confetti">
+    <canvas id="canvas"></canvas>
+  </div>
+<% end %>
+
+<!--화면 전환용 버튼, 관리자에게만 보이게
+<%if current_user && current_user.admin?%>
+  <button onclick = "showTime()" type = "button" id = "pageToTime">시간 페이지 보기</button>
+  <button onclick = "showResult()" type = "button" id = "pageToResult">결과 페이지 띄우기</button>
+<%end%>
+
+
+페이지 전환용 버튼
+<script> 
+  var timeButton = document.getElementById("pageToTime");
+  var resultButton = document.getElementById("pageToResult");
+
+  var timeSection = document.getElementById("timer");
+  var resultSection = document.getElementById("result");
+
+  function showTime(){
+    timeSection.style.display = "initial";
+    resultSection.style.display = "none";
+  };
+
+  function showResult(){
+    timeSection.style.display = "none";
+    resultSection.style.display = "initial";
+  };
+
+</script>
+
+
+-->
+
+<style>
+canvas {
+  position: absolute;
+  margin-left: 60px;
+  bottom: 0;
+  width: 68%;
+}
+
+</style>
+
+
+
+<!--countdown용 js-->
+<script>
+var countDownDate = new Date("August 5, 2018 20:38:00").getTime();
+// Update the count down every 1 second
+var x = setInterval(function() {
+  // Get todays date and time
+  var now = new Date().getTime();
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor(distance % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // 숫자 두자리수로 만들기
+  function numFormat(variable) 
+    { variable = Number(variable).toString(); 
+      if(Number(variable) < 10 && variable.length == 1) 
+        variable = "0" + variable; 
+      return variable; 
+    }
+
+  document.getElementById("days").innerHTML = numFormat(days);
+  document.getElementById("hours").innerHTML = numFormat(hours);
+  document.getElementById("minutes").innerHTML = numFormat(minutes);
+  document.getElementById("seconds").innerHTML = numFormat(seconds);
+  // If the count down is finished, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("example").innerHTML = "";
+  }
+
+}, 1000);
+</script>
+
+
+
+<script>
+  const canvasEl = document.querySelector('#canvas');
+
+  const w = canvasEl.width = window.innerWidth ;
+  const h = canvasEl.height = window.innerHeight * 2;
+
+  function loop() {
+    requestAnimationFrame(loop);
+      ctx.clearRect(0,0,w,h);
+  
+    confs.forEach((conf) => {
+      conf.update();
+      conf.draw();
+    })
+  }
+
+  function Confetti () {
+    //construct confetti
+    const colours = ['#fde132', '#009bde', '#ff6b00'];
+  
+    this.x = Math.round(Math.random(10) * w);
+    this.y = Math.round(Math.random(10) * h)-(h/2);
+    this.rotation = Math.random(10)*360;
+
+    const size = Math.random(10)*(w/60);
+    this.size = size < 15 ? 15 : size;
+
+    this.color = colours[Math.round(Math.random(colours.length)*10-1)]
+
+    this.speed = this.size/4;
+  
+    this.opacity = Math.random(10);
+
+    this.shiftDirection = Math.random(10) > 0.5 ? 1 : -1;
+  }
+
+  Confetti.prototype.border = function() {
+    if (this.y >= h) {
+      this.y = h;
+    }
+  }
+
+  Confetti.prototype.update = function() {
+    this.y += this.speed;
+  
+    if (this.y <= h) {
+      this.x += this.shiftDirection/5;
+      this.rotation += this.shiftDirection*this.speed/100;
+    }
+
+    this.border();
+  };
+
+  Confetti.prototype.draw = function() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, this.rotation, this.rotation+(Math.PI/2));
+    ctx.lineTo(this.x, this.y);
+    ctx.closePath();
+    ctx.globalAlpha = this.opacity;
+    ctx.fillStyle = this.color;
+    ctx.fill();
+  };
+
+  const ctx = canvasEl.getContext('2d');
+  const confNum = Math.floor(w / 5);
+  const confs = new Array(confNum).fill().map(_ => new Confetti());
+
+  loop();
+</script>
+
+
+

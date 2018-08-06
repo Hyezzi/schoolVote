@@ -1,0 +1,122 @@
+
+<!--<%= form_for(vote_log) do |f| %>
+  <% if vote_log.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(vote_log.errors.count, "error") %> prohibited this vote_log from being saved:</h2>
+
+      <ul>
+      <% vote_log.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  -->
+
+
+
+  <div class="field">
+      <%= f.text_field :studentID, class: "vote-new-input mt-4", id: "studentID", placeholder: "학번을 입력해주세요"%>
+  </div>
+
+  <div class="field">
+    <span class = "vote-new-outerbox">
+      <%= f.text_field :name, class: "vote-new-input mt-4", id: "name", placeholder: "이름을 입력해주세요" %>    
+    </span>
+  </div>
+
+  <p class = "mt-4 mb-2" id = "check-warning">본인 인증과 중복 확인을 위해 인증 버튼을 눌러주세요!</p>
+  <button type = "button" id = "checkButton" class = "btn vote-new-btn-first">인증하기</button>
+
+  <div class="field">
+    <span class = "vote-new-outerbox">
+      <%= f.text_field :phoneNum, class: "vote-new-input mt-4", id: "phoneNum", placeholder: "핸드폰 번호를 입력해주세요"%>
+    </span>
+  </div>
+
+  <div class="field">
+    <span class = "vote-new-outerbox">
+      <%= f.password_field :password, class: "vote-new-input mt-4", id: "password", placeholder: "비밀번호를 입력해주세요"%>
+    </span>
+  </div>
+
+  <div class="field">
+    <%= f.file_field :image,
+      accept: 'image/png, image/gif, image/jpeg', class: "vote-new-upload mt-4"%>
+  </div>
+
+
+<!--
+  <div class="input-group">
+  <div class="custom-file">
+    <input accept = "image/png, image/gif, image/jpeg", type="file", class="custom-file-input", id="vote_log_image", name = "vote_log[image]">
+    <label class="custom-file-label" for="vote_log_image">Choose file</label>
+  </div>
+  
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="button">Button</button>
+  </div>
+  -->
+</div>
+
+
+  <!--중복 확인된 경우에만 활성화!  안 된 경우에는 중복확인을 해 주세요 나타나있게 하기-->
+  
+  <div class="actions mt-4 d-flex flex-column justify-content-center align-items-center" id = "buttonDiv">
+    <p id = "check-label" class = "text-center mb-0" style = "font-size: 0.8em;">아직 인증하지 않았습니다</p>
+    <%= f.submit "응모하기", id: "submitButton", class: "btn vote-new-btn-second mt-1"%>
+  </div>
+<% end %>
+ 
+<!--file input
+
+<script>
+  $('#vote_log_image').on('change',function(){
+    //get the file name
+    var fileName = $(this).val();
+    console.log("fileName : ", fileName);
+    //replace the "Choose a file" label
+    $(this).next('.custom-file-label').html(fileName);
+    document.getElementByClass('.custom-file-label').html(fileName);
+  })
+</script>
+-->
+
+
+
+<script>
+  document.getElementById("submitButton").disabled = true;
+  
+  document.getElementById("checkButton").addEventListener("click", function(){
+      
+    //get element by ID
+    var studentIdIn = document.getElementById("studentID").value;
+    var nameIn = document.getElementById("name").value;
+    $.ajax({
+      async : true,
+      type : "POST",
+      data : {studentID : studentIdIn, name : nameIn},
+      url : "checkDouble",
+      dataType : "json",
+      success : function(data){
+        
+        console.log(data);
+      
+      
+        if (data["IsStudent"] == 0){
+            document.getElementById("check-warning").innerHTML = "본교 학생이 아닙니다ㅠㅠ";
+        }
+        else if (data["IsFirst"] == 0){
+            document.getElementById("check-warning").innerHTML = "이미 참여하셨습니다ㅠㅠㅠ";
+        }
+        else if (data["IsStudent"] ==1 && data["IsFirst"] == 1){
+          document.getElementById("check-warning").innerHTML = "인증이 성공했습니다!";
+          document.getElementById("submitButton").disabled = false;
+          document.getElementById("check-label").innerHTML = "인증 완료, 응모 가능합니다 :)";
+        }
+        
+    }
+    })
+    
+  })
+</script>

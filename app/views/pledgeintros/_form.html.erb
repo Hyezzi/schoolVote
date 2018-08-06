@@ -1,0 +1,38 @@
+<%= form_for(pledgeintro) do |f| %>
+  <% if pledgeintro.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pledgeintro.errors.count, "error") %> prohibited this pledgeintro from being saved:</h2>
+
+      <ul>
+      <% pledgeintro.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+  </div>
+
+  <div class="field">
+    <%= f.label :content2 %>
+    <%= f.text_area :content2 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :image %>
+    <%= f.file_field :image,
+        accept: 'image/png,image/gif,image/jpeg' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @pledgeintro.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @pledgeintro.content %>
+</p>
+
+<p>
+  <strong>Content2:</strong>
+  <%= @pledgeintro.content2 %>
+</p>
+
+  <table>
+    <td><%= image_tag("#{@pledgeintro.image}", style: "height:30%; width: auto;") %></td>
+  </table>
+
+<%= link_to 'Edit', edit_pledgeintro_path(@pledgeintro) %> |
+<%= link_to 'Back', pledgeintros_path %>

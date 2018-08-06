@@ -1,0 +1,12 @@
+<div class = "container-fluid">
+    <div class = "col-sm-11 col-xl-11 mx-auto px-0 py-0">
+        <!--<div><%=image_tag("howto.jpg", class: "vote-new-image")%></div>-->
+        <div class = "d-flex flex-column align-items-center">
+            <%= render 'form', vote_log: @vote_log %>
+        </div>
+
+        <%= link_to '뒤로가기',  vote_logs_path, class: "float-right back-link" %>
+    </div>
+</div>
+
+

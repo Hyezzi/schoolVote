@@ -1,0 +1,82 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+    <div class="howto_bar">
+    </div>
+    <div class="howto_text_title">
+        고려대학교 제51대 총학생회장단 
+        <br> 선거 투표기간
+    </div>
+
+    <div class="howto_text_box d-flex align-items-start flex-column">
+           <p class="howto_text_title2">12월 5일(화) ~ 12월 7일(목)</p>
+           <p class="howto_text_title2">투표구는 오전 9시 30분부터 오후 6시 30분까지 운영됩니다.</p>
+    </div>
+
+<%# <h1>고려대학교 총학생회장단 선거 투표기간</h1>
+<p>12월 5일(화) ~ 12월 7일(목)</p>
+<p>투표구는 오전 9시 30분부터 오후 6시 30분까지 운영됩니다.</p>
+
+<h1>고려대학교 총학생회장단 선거 투표장소</h1> %>
+
+    <div class="howto_bar">
+    </div>
+    <div class="howto_text_title">
+        고려대학교 제51대 총학생회장단 
+        <br> 선거 투표장소
+    </div>
+
+<table>
+
+<!-- 구글맵 Marker의 항목 이름들을 가림 - 관리자 모드에서 이걸 건드리기 때문
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Placename</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  -->
+
+  <tbody>
+  <br>
+    <div style='width: 330px;'>  
+      <div id="map" style='width: 330px; height: 165px;'></div>  
+    </div>
+
+      <%# 원래 구글맵이 제공하는 구글맵 사이즈는 아래임.  %>
+    <%# <div style='width: 800px;'>  
+      <div id="map" style='width: 800px; height: 400px;'></div>  
+    </div>   %>
+
+
+    <script type="text/javascript">  
+      handler = Gmaps.build('Google');  
+      handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){  
+      markers = handler.addMarkers(<%=raw @routers_default.to_json %>);  
+      handler.bounds.extendWith(markers);  
+      handler.fitMapToBounds();  
+      });  
+    </script>
+
+<!-- 구글맵 위에 Marker를 만드는 Scaffold를 가림 - 관리자 모드에서 이걸 만들기 때문
+    <% @routers.each do |router| %>
+      <tr>
+        <td><%= router.name %></td>
+        <td><%= router.placename %></td>
+        <td><%= router.latitude %></td>
+        <td><%= router.longitude %></td>
+        <td><%= link_to 'Show', router %></td>
+        <td><%= link_to 'Edit', edit_router_path(router) %></td>
+        <td><%= link_to 'Destroy', router, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    -->
+  </tbody>
+</table>
+
+<br>
+
+<%# <%= link_to 'New Router', new_router_path %>

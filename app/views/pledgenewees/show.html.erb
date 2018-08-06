@@ -1,0 +1,86 @@
+<head>
+  <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <script>
+    $(document).ready(function(){
+        $("#spreadBtn1").click(function(){
+            if($("#hiddenList1").is(":visible")){
+              $("#spreadBtn1").toggleClass("fas fa-arrow-alt-circle-right fas fa-arrow-alt-circle-down");
+                $("#hiddenList1").slideUp();
+            }else{
+                $("#spreadBtn1").toggleClass("fas fa-arrow-alt-circle-down fas fa-arrow-alt-circle-right");
+                $("#hiddenList1").slideDown();
+            }
+        });
+    }); 
+    $(document).ready(function(){
+        $("#spreadBtn2").click(function(){
+            if($("#hiddenList2").is(":visible")){
+              $("#spreadBtn2").toggleClass("fas fa-arrow-alt-circle-right fas fa-arrow-alt-circle-down");
+                $("#hiddenList2").slideUp();
+            }else{
+                $("#spreadBtn2").toggleClass("fas fa-arrow-alt-circle-down fas fa-arrow-alt-circle-right");
+                $("#hiddenList2").slideDown();
+            }
+        });
+    }); 
+    $(document).ready(function(){
+        $("#spreadBtn3").click(function(){
+            if($("#hiddenList3").is(":visible")){
+              $("#spreadBtn3").toggleClass("fas fa-arrow-alt-circle-right fas fa-arrow-alt-circle-down");
+                $("#hiddenList3").slideUp();
+            }else{
+                $("#spreadBtn3").toggleClass("fas fa-arrow-alt-circle-down fas fa-arrow-alt-circle-right");
+                $("#hiddenList3").slideDown();
+            }
+        });
+    }); 
+  </script>
+<head>
+
+<body>
+  <div class="col-9 container">
+      <p id="notice"><%= notice %></p>
+              <div class="banner_bar0"></div>
+              <p class="banner_intro"><strong> "클릭"으로 알아보는 세부 공약! </strong></p>    
+              <%= image_tag("#{@pledgenewee.image2}", class: "banner_image")%>
+              <br>
+              <div class="banner_bar1"></div>
+                  <p id="spreadBtn1" class="fas fa-arrow-alt-circle-right btn01"><strong> 첫 번째:  </strong><%= @pledgenewee.title %></p>
+              <div id="hiddenList1" class="example01 shadow p-3 mb-5 bg-light rounded">
+                  <% @list = @pledgenewee.content.split(",") %>
+                  <% i = 0 %>
+                  <% for x in @list %>
+                      <%= i = i + 1 %> <%= ". #{x}" %> <p> </p>
+                  <% end %>
+              </div>
+
+              <div class="banner_bar2"></div>
+              <p id="spreadBtn2" class="fas fa-arrow-alt-circle-right btn02"><strong> 두 번째:  </strong><%= @pledgenewee.title2 %></p>
+              <div id="hiddenList2" class="example02 shadow p-3 mb-5 bg-light rounded">
+                  <% @list2 = @pledgenewee.content2.split(",") %>
+                  <% i = 0 %>
+                  <% for x in @list2 %>
+                      <%= i = i + 1 %> <%= ". #{x}" %> <p> </p>
+                  <% end %>
+              </div>
+
+              <div class="banner_bar3"></div>
+              <span id="spreadBtn3" class="fas fa-arrow-alt-circle-right btn03"><strong> 세 번째:  </strong><%= @pledgenewee.title3 %></span>
+              <div id="hiddenList3" class="example03 shadow p-3 mb-5 bg-light rounded">
+                  <% @list3 = @pledgenewee.content3.split(",") %>
+                  <% i = 0 %>
+                  <% for x in @list3 %>
+                      <%= i = i + 1 %> <%= ". #{x}" %> <p> </p>
+                  <% end %>
+              </div>
+
+    <div class="banner_footer navbar fixed-bottom navbar-light">
+      <%= link_to '수정', edit_pledgenewee_path(@pledgenewee), class:"banner_footer_edit"%> |
+      <%= link_to '삭제', @pledgenewee, method: :delete, data: { confirm: '관리자님 지우시겠어요?' }, class:"banner_footer_delete" %> |
+      <%= link_to '뒤로가기', pledgenewees_path, class:"banner_footer_back" %> 
+    </div>
+  </div>
+</body>

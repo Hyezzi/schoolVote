@@ -1,0 +1,91 @@
+<%# 현재 투표율 %>
+<div class="votenum_box d-flex justify-content-center">
+  <div class="votenum_text">
+    투표와 함께하는 즐거움<br>
+    실시간 로또 참여인수
+    <%# 투표 인원수 %>
+    <div class="d-flex justify-content-center">
+      <p id="counter1"></p>
+    </div>
+    <%= button_to "응모하기", new_vote_log_path, :class => "btn btn-outline-secondary btn_vote", :method => :get %>
+  </div>
+  
+</div>
+<div class="container">
+<%# --------------참여방법 소개---------------- %>
+
+<%# -------참여방법소개 끝----------- %>
+  <p id="notice"><%= notice %></p>
+
+  <%#= link_to '응모하기', new_vote_log_path %>
+    <div class="row row_index">
+    <% countvar = 0%>
+      <% @vote_logs.each do |vote_log| %>
+        <% break if countvar == 99 %>
+        <%if countvar%3 == 2%>
+          <figure class="snip1273 third_img">
+            <%= image_tag vote_log.image , class: "vote_img"%>
+            <%= link_to '<i class="far fa-trash-alt"></i>'.html_safe, edit_vote_log_path(vote_log)  %>
+          </figure>
+
+        <% else %>
+
+          <figure class="snip1273">
+            <%= image_tag vote_log.image , class: "vote_img"%>
+            <%= link_to '<i class="far fa-trash-alt"></i>'.html_safe, edit_vote_log_path(vote_log)  %>
+          </figure>
+
+        <% end %>
+        <% countvar = countvar + 1%>
+    <% end %>
+    </div>
+  
+
+
+  <%#= paginate @vote_logs %>
+  <div class="searching">
+    <%= form_tag(vote_logs_path, method: :get) do %>
+      <%= text_field_tag :studentID, params[:studentID], placeholder: "학번을 입력하세요" %>
+      <%= submit_tag 'Search', name: nil, class: "searchbtn" %>
+    <% end %>
+
+  </div>
+</div>
+
+<script>
+
+    $(".vote_img").click(function() {
+      $(this).toggleClass("experiment");
+      $("i").toggleClass("after");
+    });
+
+  function numberCounter(target_frame, target_number) {
+    this.count = 0; this.diff = 0;
+    this.target_count = parseInt(target_number);
+    this.target_frame = document.getElementById(target_frame);
+    this.timer = null;
+    this.counter();
+  };
+  numberCounter.prototype.counter = function() {
+      var self = this;
+      this.diff = this.target_count - this.count;
+  
+      if(this.diff > 0) {
+          self.count += Math.ceil(this.diff / 5);
+      }
+  
+      this.target_frame.innerHTML = this.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  
+      if(this.count < this.target_count) {
+          this.timer = setTimeout(function() { self.counter(); }, 300);
+      } else {
+          clearTimeout(this.timer);
+      }
+  };
+var votenum = '<%=@num%>';
+
+new numberCounter("counter1", votenum);
+//vote count 끝---------------------
+
+</script>
+<%#= link_to 'New Vote Log', new_vote_log_path %>

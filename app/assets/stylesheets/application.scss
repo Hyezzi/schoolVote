@@ -1,0 +1,738 @@
+@import "bootstrap";
+
+//------------------font 정리--------------------
+
+@font-face { font-family: 'WONTitle'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/WONTitle.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+@font-face { font-family: 'NanumSquareRound'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+@font-face { font-family: 'GyeonggiBatang'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiBatang.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+@font-face { font-family: 'TmonMonsori'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/TmonMonsori.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+.body {
+  font-family: 'NanumSquareround';
+  color: rgba(63, 56, 56, 0.883);
+}
+
+
+.test{
+  background-image: url("realbg2.jpg"); 
+  /* background-color: #f8f6f0;   */
+}
+
+//------------------image효과 시작-------------
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,700);
+.row_index{
+    margin-left: 0px;
+}
+figure.snip1273{
+    position: relative;
+}
+
+figure.snip1273 *{
+    box-sizing: border-box;
+}
+
+figure i {
+    transform: scale(0);
+    position: absolute;
+    opacity: 1;
+    margin: 1em;
+    color: white;
+}
+
+.after{
+    transform: scale(1.6);
+    transition-property:scale;
+    transition-duration:0.3s; 
+}
+
+
+figure i.fa-trash-alt{
+    top: 30%;
+    left: 30%;
+}
+
+
+
+
+.snip1273 {
+  font-family: 'Raleway', Arial, sans-serif;
+  position: relative;
+  float: left;
+  margin: 2%;
+  width: 28%;
+  color: #ffffff;   
+  text-align: left;
+  font-size: 16px;
+  background: -webkit-linear-gradient(rgba(157,147,247,1), rgba(117,176,247,1));
+}
+.third_img{
+    margin-right: 0px;
+}
+.snip1273 * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.5s ease-in;
+  transition: all 0.5s ease-in;
+}
+
+
+.experiment{
+    -webkit-filter: grayscale(50%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(50%);
+    opacity: 0.58;
+    transition-property: all;
+    transition-duration: 0.6s;
+}
+
+
+/* ------------------img효과 끝--------------- */
+
+
+//------------------main-----------------------
+.vote_img{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    vertical-align: top;
+}
+
+.votenum_box{
+    width: 100%;
+    height: 200px;
+    background-image: url("background.PNG");
+    background-size: 100% 200px;
+    align-items: center;
+}
+.votenum_text{
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    font-family:"NanumSquareround";
+    
+}
+
+//인원수 counter
+#counter1{
+    font-size: 23px;
+    font-weight: 500;
+}
+
+.btn_vote{//응모하기 버튼
+    margin-top: -22px;
+    background-color: transparent;
+    color: white;
+    border: solid white 2px;
+    border-radius: 100px;
+    height: 4.7vh;
+    font-size: 0.8em;
+}
+
+@media screen and (min-width: 650px){
+    .votenum_box{
+        height: 250px;
+        background-size: 100% 250px;
+    }
+    .votenum_text{
+        font-size: 30px;
+    }
+    #counter1{
+        font-size: 35px;
+    }
+    .btn_vote{
+        font-size: 0.7em;
+        height: 5.2vh;
+    }
+
+}
+
+
+// .images{
+//     //align-items: stretch;
+//     margin-top: 1.5rem;
+//     margin-right: 0.8rem;
+//     margin-left: 0.8rem;
+// }
+.searching{
+    margin-top: 50px;
+}
+
+.searchbtn{
+  background-color: transparent;
+  color: black;
+  border: solid rgba(157,147,247,1) 2px;
+  border-radius: 100px;
+  height: 4.5vh;
+  font-size: 0.9em;
+}
+
+//----------------main 끝-------------------
+
+//----------------참여방법 소개 css----------------
+
+.howto_img_box{
+    height: 110.5px;
+    width: 100%;
+    margin-bottom: 35px;
+}
+
+.howto_img{
+    height: 100%;
+    width: 100%;
+}
+
+.howto_bar{
+    width: 45px;
+    height: 2px;
+    background: -webkit-linear-gradient(rgba(157,147,247,1), rgba(117,176,247,1));
+    margin-bottom: 10.5px;
+}
+
+.howto_text_box{
+    margin-top: 15px;
+    margin-right: 8px;
+    margin-left: 8px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.howto_text_title{
+    font-family: 'NanumSquareRound';
+    font-size: 20px;
+}
+
+.howto_text_title2{
+    font-size: 13px;
+    margin-bottom: 19px;
+    font-family: 'NanumSquareRound';
+}
+
+.howto_text_normal{
+    font-size: 10px;
+    line-height: 14px;
+    font-family: 'NanumSquareRound';
+}
+//이전
+
+//--------------참여방법 소개 css 끝---------------
+
+
+//--------------header---------------------
+.headerfont{
+    font-family: "TmonMonsori";
+    font-size: 28px;
+    line-height: 35px;
+    background: -webkit-linear-gradient(rgba(157,147,247,1), rgba(117,176,247,1));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+}
+
+@media screen and (max-width: 500px){
+    .headerfont{
+      font-size: 18px;
+    }
+
+    .normalfont{
+      font-size: 13px;
+    }
+  
+}
+
+
+.navwid {
+  width: 77rem;
+  text-align: right;
+}
+
+@media screen and (max-width: 500px){
+  .navcon {
+    text-align: right;
+  }
+  .navwid {
+    width: 25.2rem;
+    padding: 2rem;
+  }
+}
+
+.normalfont {
+  color: rgb(71,71,71);
+  font-family: "NanumSquareround";
+}
+
+.custom-toggler.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(157,147,247,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.bottom {
+    box-shadow: 0px 15px 10px -15px #111;    
+  }
+
+.line {
+    width: 40px;
+    height: 2px;
+    background-image: linear-gradient( 33.2deg,  rgba(157,147,247,1) 30.2%, rgba(117,176,247,1) 61.4% );
+    line-height: 18px;
+}
+
+.scrollToTop{
+    width:100px; 
+    height:130px;
+    padding:10px; 
+    text-align:center; 
+    background: whiteSmoke;
+    color: #444;
+    text-decoration: none;
+    position: flex;
+    top:75px;
+    right:40px;
+    display:none;
+    background: url('arrow_up.png') no-repeat 0px 20px;
+}
+.scrollToTop:hover{
+    text-decoration:none;
+}
+
+//-------------header 끝----------------------
+
+// Lotto Index Page 
+// 카운트다운 타이머 -----------------------
+#timer {
+    margin-top: 100px;
+}
+
+ul#example {
+    list-style: none;
+    margin: 50px 0;
+    padding: 0;
+    display: block;
+    text-align: center;
+  }
+  
+  ul#example li { display: inline-block; }
+  
+  ul#example li span {
+    font-size: 50px;
+    font-weight: 300;
+    line-height: 45px;
+  }
+  
+  ul#example li.seperator {
+    font-size: 40px;
+    line-height: 35px;
+    vertical-align: top;
+  }
+  
+  ul#example li p {
+    color: #a7abb1;
+    font-size: 15px;
+  }
+
+  ul#example li.title {
+    font-family: "WONTitle";
+    color: #a7abb1;
+    font-size: 30px;
+  }
+//------------------------------타이머 끝//
+
+//---------당첨자명단
+#winnerbox {
+    margin: 0px 30px;
+    background: #f1efed;
+    height: 300px;
+}
+
+//모바일 fontsize test
+@media screen and (max-width:600px) {
+    #winnerbox {
+      font-size: 12px
+    }
+    h4.lottitle {
+        font-size: 15px
+      }
+  }
+  .titlel {
+    color: #333;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    position: relative;
+    font-size: 20px;
+    margin: 60px 0 60px;
+ }
+ .titlel::after {
+    content: "";
+    width: 190px;
+    position: absolute;
+    margin: 0 auto;
+    height: 3px;
+    background: rgb(114, 16, 16);
+    left: 0;
+    right: 0;
+    bottom: -15px;
+ 
+ }
+
+ //---------------------------------------
+ //----------footer 관련 css--------------
+ $brand-light: #fff;
+
+* {
+  box-sizing: border-box;
+}
+
+
+footer {
+  height: 25vh;
+  background-image: linear-gradient( 33.2deg,  rgba(157,147,247,1) 30.2%, rgba(117,176,247,1) 61.4% );
+  position: relative;
+  .footer__inner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    * {
+      color: white;
+    }
+  }
+  .logo {
+    font-family: 'TmonMonsori';
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    transform: translateY(50px);
+    opacity: 0;
+    transition: transform, opacity;
+    transition-duration: .8s;
+    transition-timing-function: ease;  
+    
+    &.show{
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+//--------------------------for vote_logs---------------------
+@media (max-width: 575.98px) { 
+  
+  .vote-new-image{
+    width: 100%;
+    height: 20vh;
+  }
+  
+  .vote-new-input{
+    outline: none;
+    border: solid 0px;
+    border-bottom: solid grey 2px;
+    text-align: center;
+    width: 50vw;
+
+    transition: border .8s ease-in-out;
+  }
+
+}
+
+@media (min-width: 1200px) { 
+  .vote-new-image{
+    width: 100%;
+    height: 30vh;
+  }
+  
+  .vote-new-input{
+    border: 3px solid transparent;
+    border-width: 0 0 2px 0;
+    -moz-border-image: -moz-linear-gradient(left, rgba(157,147,247,1) 0%, rgba(117,176,247,1) 100%);
+    -webkit-border-image: -webkit-linear-gradient(left, rgba(157,147,247,1) 0%, rgba(117,176,247,1) 100%);
+    border-image: linear-gradient(to right, rgba(157,147,247,1) 0%, rgba(117,176,247,1) 100%);
+    border-image-slice: 1;
+    margin-bottom: 10px;
+  
+    text-align: center;
+  
+    width: 30vw;
+  }
+
+ }
+
+.vote-new-input:focus{
+  position: relative;
+  //left: -0.5vw;
+  top: -0.5vh;
+  outline: none;
+  box-shadow: -6px 0 white,         /*Left masking shadow*/
+              6px 0 white,          /*Right masking shadow*/
+              0 2px 2px -1px rgba(157,147,247,1); /*The real (slim) shadow*/
+
+
+  border: 3px solid transparent;
+  border-width: 0 0 2px 0;
+  -moz-border-image: -moz-linear-gradient(left, rgba(157,147,247,1) 0%, rgba(117,176,247,1) 100%);
+  -webkit-border-image: -webkit-linear-gradient(left, rgba(157,147,247,1) 0%, rgba(117,176,247,1) 100%);
+  border-image: linear-gradient(to right, rgba(157,147,247,1) 0%, rgba(117,176,247,1) 100%);
+  border-image-slice: 1;
+  //margin-bottom: -0.5vh;
+  transition: border .8s ease-in-out;
+          
+  
+
+}
+
+.vote-new-input::placeholder {
+  color:#cbd0d5;
+  font-size: 0.8em;
+}
+
+#check-warning{
+  font-size: 0.8em;
+}
+
+
+
+.vote-new-btn-first:hover{
+  background-color: rgba(157,147,247,1);
+  color: white;
+}
+
+.vote-new-upload{
+  background-color: rgba(234,234,234,1);
+}
+
+.back-link{
+  color: inherit;
+}
+
+
+.vote-new-btn-first, .vote-new-btn-second{
+  background-color: transparent;
+  color: rgba(157,147,247,1);
+  border: solid rgba(157,147,247,1) 2px;
+  border-radius: 100px;
+  height: 4.5vh;
+  font-size: 0.9em;
+  
+}
+//----------------------------------------------------------------------------
+
+.cover {
+  opacity: 0.15;
+}
+
+// Routers 투표는 언제 어디서 하나요? 
+.howto_bar_routers {
+  width: 40px;
+  height: 1px;
+  background-color: #A13030;
+  margin-bottom: 10.5px;
+}
+
+.howto_text_title_routers {
+  font-size: 20px;
+}
+
+.howto_text_box_routers {
+  margin-top: 15px;
+  margin-right: 8px;
+  margin-left: 8px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.howto_text_title2_routers {
+  font-size: 13px;
+  margin-bottom: 19px;
+}
+
+// 포스터 페이지 CSS
+ul {
+    list-style: none;
+    }
+    .poster_name {
+    font-size: 2.5rem;
+    margin-top: 7%;
+    }
+  .poster_image{
+    width: 55vw; 
+    height: 43.5vh; 
+    margin-top: 3%;
+  }
+  
+  .poster_footer{
+    height: 5%; 
+    background-color: #7D2222; 
+    position:relative;
+    font-size: 2rem;
+  }
+
+  .poster_font {
+    color: white;
+  }
+
+  .poster_intro {
+    font-size: 2rem;
+  }
+
+  .poster_bar {
+    margin-top: 10%; 
+    background-color: #7D2222; 
+    width: 10%; 
+    height: 0.35vh;
+  }
+  .poster_bar2 { 
+    margin-bottom: 10%;
+    background-color: #7D2222; 
+    width: 10%; 
+    height: 0.35vh;
+  }
+
+// 배너 페이지 CSS
+
+    .banner_intro {
+      font-size: 2rem;
+    }
+    .banner_image {
+      height: auto; 
+      width: 100%;
+    }
+    .banner_footer {
+      height: 5%; 
+      background-color: #7D2222; 
+      position: relative; 
+      margin-top: 7%;
+    }
+    
+    .banner_footer_edit {
+      color: white;
+    }
+
+    .banner_footer_delete {
+      color: white;
+    }
+
+    .banner_footer_back {
+      color: white;
+    }
+
+    .banner_bar0 {
+      background-color: #7D2222; 
+      width: 10%; 
+      height: 0.35vh;
+      margin-top: 7%;
+    }
+
+    .banner_bar1 {
+      background-color: #7D2222; 
+      width: 10%; 
+      height: 0.35vh;
+      margin-top: 7%;
+    }
+
+    .banner_bar2 {
+      background-color: #7D2222; 
+      width: 10%; 
+      height: 0.35vh;
+      margin-top: 7%;
+    }
+
+    .banner_bar3 {
+      background-color: #7D2222; 
+      width: 10%; 
+      height: 0.35vh;
+      margin-top: 7%;
+    }
+
+    .banner_intro {
+        font-size: 2rem;
+        margin-top: 3%;
+      }
+    .banner_image {
+        height: auto; 
+        width: 100%;
+      }
+      .banner_footer {
+        height: 5%; 
+        background-color: #7D2222; 
+        position: relative; 
+        margin-top: 7%;
+      }
+      
+      .banner_footer_edit {
+        color: white;
+        font-size: 1.5rem;
+      }
+  
+      .banner_footer_delete {
+        color: white;
+        font-size: 1.5rem;
+      }
+  
+      .banner_footer_back {
+        color: white;
+        font-size: 1.5rem;
+      }
+  
+      .banner_bar0 {
+        background-color: #7D2222; 
+        width: 10%; 
+        height: 0.35vh;
+        margin-top: 7%;
+      }
+  
+      .banner_bar1 {
+        background-color: #7D2222; 
+        width: 10%; 
+        height: 0.35vh;
+        margin-top: 7%;
+      }
+  
+      .banner_bar2 {
+        background-color: #7D2222; 
+        width: 10%; 
+        height: 0.35vh;
+        margin-top: 7%;
+      }
+  
+      .banner_bar3 {
+        background-color: #7D2222; 
+        width: 10%; 
+        height: 0.35vh; 
+        margin-top: 7%;
+      }
+  
+      .btn03 {
+        font-size: 2rem;
+        margin-top: 3%;
+      }
+  
+      .btn02 {
+        font-size: 2rem;
+        margin-top: 3%;
+      }
+  
+      .btn01 {
+        font-size: 2rem;
+        margin-top: 3%;
+      }
+  
+      .example03 {
+        display: none; 
+        font-size: 1.5rem;
+      }
+  
+      .example02 {
+        display: none; 
+        font-size: 1.5rem;
+      }
+  
+      .example01 {
+        display: none; 
+        font-size: 1.5rem;
+      }

@@ -1,0 +1,56 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+
+<style>
+.topbutton{
+    font-family:'NanumSquareRound';
+    margin: 18px;
+}
+</style>
+
+
+<a href="" class="scrollToTop footer__inner topbutton">Top</a>
+<footer>
+  <div class="footer__inner fixed-bottom">
+    <div class="logo">LIKELION</div>
+  </div>
+</footer>
+
+<script>
+  var logoElement = $('footer .logo');
+  $(window).scroll(function() {
+    if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+        $(logoElement).addClass('show');
+    } else if($(logoElement).hasClass('show') && $(window).scrollTop() + $(window).height() > $(document).height() - 150) {
+        $(logoElement).removeClass('show');
+    }
+  });
+
+  $(document).ready(function(){
+    //Check to see if the window is top if not then display button
+        $(window).scroll(function(){
+            if ($(this).scrollTop() > 100) {
+                $('.scrollToTop').fadeIn();
+            } else {
+                $('.scrollToTop').fadeOut();
+            }
+        });
+    //Click event to scroll to top
+    $('.scrollToTop').click(function(){
+        $('html, body').animate({scrollTop : 0},800);
+        return false;
+        });
+    });
+    jQuery(function($) {
+        $("body").css("display", "none");
+        $("body").fadeIn(2000);
+        $("a.transition").click(function(event){
+        event.preventDefault();
+        linkLocation = this.href;
+        $("body").fadeOut(1000, redirectPage);
+        });
+        function redirectPage() {
+        window.location = linkLocation;
+        }
+    });
+  </script>

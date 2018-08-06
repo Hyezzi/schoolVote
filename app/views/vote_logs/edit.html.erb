@@ -1,0 +1,20 @@
+<div class="container">
+<p id="notice"><%= notice %></p>
+
+<%= link_to 'Destroy', @vote_log, class: "pass searchbtn", method: :delete, data: {confirm: "Are you sure?"} %>
+
+<%= link_to 'Back', vote_logs_path, class: "searchbtn"%>
+</div>
+
+<script>
+  var pass = document.querySelector(".pass");
+    do{
+      var a = prompt("인증코드를 입력하세요");
+      if(a == '<%=@vote_log.password%>'){
+      }
+      else{
+        alert("다시 입력해주세요");
+      }
+    }while(a!='<%=@vote_log.password%>');
+
+</script>

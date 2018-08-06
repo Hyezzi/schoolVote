@@ -1,0 +1,3 @@
+class SchoolDb < ApplicationRecord
+    
+end

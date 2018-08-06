@@ -1,0 +1,511 @@
+
+<%# 만약 pledges모델에 글이 하나면 단일후보퀴즈가 보임 %>
+<% if Pledgenewee.all.count == 1 %> 
+  <div class="test">
+    <h1>블라인드 공약 테스트</h1>
+    <div class="quiz-container"> 
+      <div id="quiz"> </div> 
+    </div> 
+    <button id="previous">◀</button>  &nbsp; 
+    <button id="next">▶</button> 
+    <button id="submit">확인</button>
+  </div>
+  <div id="resultbox">
+    <p class="warn">이용자와 후보와의 매칭률을 찾아주는 단순 서비스이며, 여론조사가 아닙니다.</p>  
+    <div id="results"> </div>
+  </div>  
+
+<%# 글이 2개==후보2팀이면 두팀의 퀴즈 %>
+<% else %>
+  <div class="test">
+    <h1>블라인드 공약 테스트</h1>
+    <div class="quiz-container">
+      <div id="quiz"> </div>
+    </div>
+    <button id="previous">◀</button>  &nbsp;
+    <button id="next">▶</button>
+    <button id="submit">확인</button>  
+  </div>
+  <div id="resultbox">
+    <p class="warn">이용자와 후보와의 매칭률을 찾아주는 단순 서비스이며, 여론조사가 아닙니다.</p>  
+    <div id="results"> </div>
+  </div>
+<% end %> 
+
+<style>
+@import url(https://fonts.googleapis.com/css?family=Work+Sans:300,600);
+
+body{
+  font-size: 20px;
+  font-family: 'Work Sans', sans-serif;
+  color: #333;
+  font-weight: 300;
+  text-align: center;
+}
+
+h1{
+  font-weight: 300;
+  margin: 0px;
+  padding: 10px;
+  font-size: 20px;
+  background-color: rgb(134,164,247);
+  color: #fff;
+}
+
+.question{
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+@media screen and (max-width:500px) {
+  .question{
+    font-size:20px;
+    width: 80%;
+    margin-left: 30px;
+    text-align: left;
+  }
+  .answers {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: left;
+  display: inline-block;
+  width: 80%;
+  font-size: 15px;
+  position: relative;
+  }
+  #results{
+     margin-left: 20px;
+    width: 90%;
+    background-color:white;
+  }
+  #resultbox{  
+    background-color:rgb(234,234,237);
+    padding-bottom: 5px;
+  }
+}
+
+.answers {
+  margin-bottom: 20px;
+  text-align: left;
+  display: inline-block;
+  position: relative;
+}
+
+.answers label{
+  display: block;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+#previous, #next, #submit{
+  font-family: 'Work Sans', sans-serif;
+  font-size: 15px;
+  /* background: -webkit-linear-gradient(rgba(157,147,247,1), rgba(117,176,247,1)); */
+  background-color:rgb(134,164,247);
+  color: #fff;
+  border: 0px;
+  border-radius: 3px;
+  padding: 10px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+button:hover{
+    background-color: #38a;
+}
+
+.slide{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.active-slide{
+  opacity: 1;
+  z-index: 2;
+}
+.quiz-container{
+  position: relative;
+  height: 200px;
+  margin-top: 40px;
+  /* background-color: #f8f6f0; */
+}
+.container{
+  /* background-color: #f8f6f0; */
+}
+.report {
+  text-align: left;
+  font-size: 14px;
+}
+#winner {
+background: -webkit-linear-gradient(rgba(157,147,247,1), rgba(117,176,247,1));    
+}
+#no {
+  background: -webkit-linear-gradient(rgba(157,147,247,1), rgba(117,176,247,1));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+}
+#percent{
+  font-size:10px;
+}
+.warn{
+  font-size: 11px;
+}
+</style>
+
+<%# 대선후보가 1 명일때-------------------------------------------------------------------------------------- %>
+<% if Pledgenewee.all.count == 1 %> 
+<script>
+(function() {
+  const myQuestions = [
+    { //문제수는 편의상 홀수개로 해주세요!
+      question: "여러분은 사드배치에 대해 어떻게 생각하세요?",
+      answers: {
+            a: '찬성',
+            b: '반대'
+      },
+      candidateA: "a" 
+    },
+    {
+      question: "우리 정부가 일자리를 더 많이 만들려면 어떻게 해야할까요?",
+      answers: {
+            a: '찬성',
+            b: '반대',
+      },
+      candidateA: "b"
+    },
+    {
+      question: "일과 삶이 균형을 이루는 '저녁이 있는 삶'을 만들려면 정부가 무엇을 해야할까요?",
+      answers: {
+            a: '찬성',
+            b: '반대',
+      },
+      candidateA: "b"
+    }
+  ];
+  function buildQuiz() {
+    // we'll need a place to store the HTML output
+    const output = [];
+    // for each question...
+    myQuestions.forEach((currentQuestion, questionNumber) => {
+      // we'll want to store the list of answer choices
+      const answers = [];
+       const now = questionNumber+1 +'/'+myQuestions.length
+      // and for each available answer...
+      for (letter in currentQuestion.answers) {
+        // ...add an HTML radio button
+        answers.push(
+          `<label>
+             <input type="radio" name="question${questionNumber}" value="${letter}">
+              ${letter} :
+              ${currentQuestion.answers[letter]}
+           </label>`
+        );
+      }
+      // add this question and its answers to the output
+      output.push(
+        `<div class="slide">
+            <div class="now"> ${now} </div>
+            <div class="question"> Q. ${currentQuestion.question} </div>
+            <div class="answers"> ${answers.join("")} </div>
+         </div>`
+      );
+    });
+    // finally combine our output list into one string of HTML and put it on the page
+    quizContainer.innerHTML = output.join("");
+  }
+  function showResults() {
+    // gather answer containers from our quiz
+    const answerContainers = quizContainer.querySelectorAll(".answers");
+    // keep track of user's answers
+    let numA = 0; //수정2 numCorrect 이름을 numA로 변경
+    // for each question...
+    myQuestions.forEach((currentQuestion, questionNumber) => {
+      // find selected answer
+      const answerContainer = answerContainers[questionNumber];
+      const selector = `input[name=question${questionNumber}]:checked`;
+      const userAnswer = (answerContainer.querySelector(selector) || {}).value;
+      // if answer is correct
+      if (userAnswer === currentQuestion.candidateA) {
+        // add to the number of correct answers
+        numA++;
+        //answerContainers[questionNumber].style.color = "lightgreen";
+        //answerContainers[questionNumber].innerHTML +="후보1 정책입니다.";    
+      }
+    });
+    // show number of correct answers out of total
+    // resultsContainer.innerHTML = `${numA} out of ${myQuestions.length}`;
+    
+    const teamname = "<%= Pledgenewee.where(id:9).pluck(:Title).to_s.gsub('"','') %>";
+    const result = []
+    const percentAA = numA/myQuestions.length*100
+    const percentA = percentAA.toFixed(1)
+    const percentB = 100-percentA
+    const report = `
+        <br><h5> 1. 여러분은 사드배치에 대해 어떻게 생각하세요? </h5>
+        <div class="A1">'찬성'= 후보공약 </div>
+        <div class="B1"> '반대'  </div> <br>
+        <hr>  
+        <br><h5> 2. 우리 정부가 일자리를 더 많이 만들려면 어떻게 해야할까요? </h5>
+        <div class="B2"> '찬성' </div>
+        <div class="A2"> '반대' = 후보공약' </div> <br>
+        <hr> 
+        <br><h5> 3. 일과 삶이 균형을 이루는 '저녁이 있는 삶'을 만들려면 정부가 무엇을 해야할까요?"</h5>
+        <div class="B3">'찬성'</div>
+        <div class="A3">'반대' = 후보공약 </div> <br>`
+    
+      //resultsContainer.innerHTML =  numA + '/' + myQuestions.length + '후보1 정책을 더 선호합니다.';
+    result.push(
+      `<div class="container"> <br><h4>${percentA}%의 확률로<br> ${teamname}의 정책을 찬성합니다.</h4> 
+      <div class="progress"> 
+        <div class="progress-bar" id="winner" style="width:${percentA}%">${percentA}% </div>
+        <div class="progress-bar" id="no" style="width:${percentB}%">${percentB}% </div>
+      </div><br>
+      <div class="report"> ${report} </div>
+      <button id="submit"><a href="/pledges" style="color:white"> 공약 더보러가기 </button>
+      </div>`
+      )
+    resultsContainer.innerHTML = result.join("");
+    resultsContainer.querySelector(".A1").style.color ="navy";
+    resultsContainer.querySelector(".A2").style.color ="navy";
+    resultsContainer.querySelector(".A3").style.color ="navy";
+  }
+
+  function showSlide(n) {
+    slides[currentSlide].classList.remove("active-slide");
+    slides[n].classList.add("active-slide");
+    currentSlide = n;
+    
+    if (currentSlide === 0) {
+      previousButton.style.display = "none";
+    } else {
+      previousButton.style.display = "inline-block";
+    }
+    
+    if (currentSlide === slides.length - 1) {
+      nextButton.style.display = "none";
+      submitButton.style.display = "inline-block";
+    } else {
+      nextButton.style.display = "inline-block";
+      submitButton.style.display = "none";
+    }
+  }
+  function showNextSlide() {
+    showSlide(currentSlide + 1);
+  }
+  function showPreviousSlide() {
+    showSlide(currentSlide - 1);
+  }
+  const quizContainer = document.getElementById("quiz");
+  const resultsContainer = document.getElementById("results"); 
+  const submitButton = document.getElementById("submit");
+  // display quiz right away
+  buildQuiz();
+  const previousButton = document.getElementById("previous");
+  const nextButton = document.getElementById("next");
+  const slides = document.querySelectorAll(".slide");
+  let currentSlide = 0;
+  showSlide(0);
+  // on submit, show results
+  submitButton.addEventListener("click", showResults); 
+  previousButton.addEventListener("click", showPreviousSlide); 
+  nextButton.addEventListener("click", showNextSlide); 
+})();
+</script>
+
+<%# 대선후보가 2 명일때-------------------------------------------------------------------------------------- %>
+<%else%>
+<script>
+(function() {
+  const myQuestions = [
+    { //문제수는 편의상 홀수개로 해주세요!
+      question: "여러분은 사드배치에 대해 어떻게 생각하세요?<br>",
+      answers: {
+            정책1: '찬성',
+            정책2: '반대'
+      },
+      candidateA: "정책1" 
+    },
+    {
+      question: "우리 정부가 일자리를 더 많이 만들려면 어떻게 해야할까요?",
+      answers: {
+            정책1: '공공부문에서 일자리 늘리기',
+            정책2: '창업과 중소기업을 지원',
+      },
+      candidateA: "정책2"
+    },
+    {
+      question: "일과 삶이 균형을 이루는 '저녁이 있는 삶'을 만들려면 정부가 무엇을 해야할까요?",
+      answers: {
+            정책1: '주 52시간 법정노동시간 지키기',
+            정책2: '퇴근 후 돌발노동을 법적으로 금지',
+      },
+      candidateA: "정책2"
+    }
+  ];
+  
+  function buildQuiz() {
+    // we'll need a place to store the HTML output
+    const output = [];
+    // for each question...
+    myQuestions.forEach((currentQuestion, questionNumber) => {
+      // we'll want to store the list of answer choices
+      const answers = [];
+      //추가
+      const now = questionNumber+1 +'/'+myQuestions.length
+
+      // and for each available answer...
+      for (letter in currentQuestion.answers) {
+        // ...add an HTML radio button
+        answers.push(
+          `<label>
+             <input type="radio" name="question${questionNumber}" value="${letter}">
+              ${letter} :
+              ${currentQuestion.answers[letter]}
+           </label>`
+        );
+      }
+      // add this question and its answers to the output
+      output.push(
+        `<div class="slide">
+          <div class="now"> ${now} </div>
+           <div class="question"> Q. ${currentQuestion.question} </div>
+           <div class="answers"> ${answers.join("")} </div>
+         </div>`
+      );
+    });
+    // finally combine our output list into one string of HTML and put it on the page
+    quizContainer.innerHTML = output.join("");
+  }
+  function showResults() {
+    // gather answer containers from our quiz
+    const answerContainers = quizContainer.querySelectorAll(".answers");
+    
+    // keep track of user's answers
+    let numA = 0; //수정2 numCorrect 이름을 numA로 변경
+    let numB = 0;
+    // for each question...
+    myQuestions.forEach((currentQuestion, questionNumber) => {
+      // find selected answer
+      const answerContainer = answerContainers[questionNumber];
+      const selector = `input[name=question${questionNumber}]:checked`;
+      const userAnswer = (answerContainer.querySelector(selector) || {}).value;
+      // if answer is correct
+      if (userAnswer === currentQuestion.candidateA) {
+        // add to the number of correct answers
+        numA++;
+        //currentQuestion.candidateA.style.color ="red";
+        //answerA[questionNumber].innerHTML +='<br>&nbsp&nbsp후보1의 정책';      
+      } 
+      else {
+        // if answer is wrong or blank
+        numB++;
+      }
+    });
+    // resultsContainer.innerHTML = `${numA} out of ${myQuestions.length}`;
+    const teamname1 = "<%= Pledgenewee.where(id:9).pluck(:Title).to_s.gsub('"','') %>";  
+    const teamname2 = "<%= Pledgenewee.where(id:10).pluck(:Title).to_s.gsub('"','') %>";
+      
+    const result = []
+    const percentAA = numA/myQuestions.length*100.
+    const percentA = percentAA.toFixed(1)
+    const percentBB = numB/myQuestions.length*100
+    const percentB = percentBB.toFixed(1)
+    // 결과페이지에  -- 문제-후보매칭<< 코드별루지만ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ양해부탁ㅠㅠㅠㅠㅠㅠ
+    const report = `
+            <br><h5> 1. 여러분은 사드배치에 대해 어떻게 생각하세요? </h5>
+              <div class="A1">'찬성'= 후보1 </div>
+              <div class="B1"> '반대'= 후보2  </div> <br>
+            <hr>  
+            <h5> 2. 우리 정부가 일자리를 더 많이 만들려면 어떻게 해야할까요? </h5>
+              <div class="B2"> '공공부문에서 일자리 늘리기' = 후보2' </div>
+              <div class="A2"> '창업과 중소기업을 지원' = 후보1' </div> <br>
+            <hr>  
+            <h5> 3. 일과 삶이 균형을 이루는 '저녁이 있는 삶'을 만들려면 정부가 무엇을 해야할까요?"</h5>
+              <div class="B3">'주 52시간 법정노동시간 지키기' = 후보2 </div>
+              <div class="A3">'퇴근 후 돌발노동을 법적으로 금지' = 후보1 </div><br>` 
+  
+    if(numA>numB){
+      //resultsContainer.innerHTML =  numA + '/' + myQuestions.length + '후보1 정책을 더 선호합니다.';
+      result.push(`
+      <div class="container"> 
+        <br><h3>${percentA}%의 확률로 <br>${teamname1} 정책을 더 선호합니다. </h3>
+        <div class="progress">
+          <div class="progress-bar" id="winner" style="width:${percentA}%"> ${percentA}% </div>
+          <div class="progress-bar bg-secondary" style="width:${percentB}%"> ${percentB}% </div>
+        </div>
+        <div class="report"> ${report} </div>
+      </div>`
+      )
+
+      resultsContainer.innerHTML = result.join("");
+      resultsContainer.querySelector(".A1").style.color ="blue";
+      resultsContainer.querySelector(".A2").style.color ="blue";
+      resultsContainer.querySelector(".A3").style.color ="blue"; 
+    }
+    else{
+         result.push(`
+         <div class="container"> 
+          <br><h3> ${percentB}%의 확률로 <br> ${teamname2} 정책을 더 선호합니다.</h3>
+          <div class="progress">
+            <div class="progress-bar" id="winner" style="width:${percentB}%"> ${percentB}% </div>
+            <div class="progress-bar bg-secondary" style="width:${percentA}%"> ${percentA}% </div>
+          </div>
+        <div class="report"> ${report} </div>
+        </div>`
+      )
+      resultsContainer.innerHTML = result.join("");
+      resultsContainer.querySelector(".B1").style.color ="blue";
+      resultsContainer.querySelector(".B2").style.color ="blue";
+      resultsContainer.querySelector(".B3").style.color ="blue";
+      
+    }
+  }
+  function showSlide(n) {
+    slides[currentSlide].classList.remove("active-slide");
+    slides[n].classList.add("active-slide");
+    currentSlide = n;
+    
+    if (currentSlide === 0) {
+      previousButton.style.display = "none";
+    } else {
+      previousButton.style.display = "inline-block";
+    }
+    
+    if (currentSlide === slides.length - 1) {
+      nextButton.style.display = "none";
+      submitButton.style.display = "inline-block";
+    } else {
+      nextButton.style.display = "inline-block";
+      submitButton.style.display = "none";
+    }
+  }
+  function showNextSlide() {
+    showSlide(currentSlide + 1);
+  }
+  function showPreviousSlide() {
+    showSlide(currentSlide - 1);
+  }
+  const quizContainer = document.getElementById("quiz");
+  const resultsContainer = document.getElementById("results"); 
+  const submitButton = document.getElementById("submit");
+  // display quiz right away
+  buildQuiz();
+  const previousButton = document.getElementById("previous");
+  const nextButton = document.getElementById("next");
+  const slides = document.querySelectorAll(".slide");
+  let currentSlide = 0;
+  showSlide(0);
+  // on submit, show results
+  submitButton.addEventListener("click", showResults); //next슬라이드에서 show results하기 (미해결 ㅜ.ㅜ) // 아니면 밑에 뜨도록그냥두고 꾸미기(ing)
+  previousButton.addEventListener("click", showPreviousSlide); 
+  nextButton.addEventListener("click", showNextSlide); //넥스트버튼누르면 shownextslide=showslide(n+1)function에 addslide되는 기능잇움
+})();
+</script>
+<% end %> 

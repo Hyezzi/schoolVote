@@ -1,0 +1,2 @@
+module PledgeintrosHelper
+end

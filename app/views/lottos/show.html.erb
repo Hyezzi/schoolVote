@@ -1,0 +1,144 @@
+<%= render 'result'%>
+
+
+<!--
+<div class="container-fluid" id = "after-chuchum">    
+  <div class="row content">
+    
+    <div class="container">
+      <div class="titlel">당첨자 발표</div> 
+    </div>
+
+    <div class="col-8 col-md-10 col-center m-auto text-center" id="winnerbox">
+      <h4 class="lottitle"><br> 축하합니다 :) </h4>
+      
+      <% for n in 0...@lotto.winnum.to_i %>
+          <%@winnerID = $winnerarray[n][0]%>
+          <%@imageURL = VoteLog.where(studentID: @winner).pluck(:image).to_s%>
+          <%=puts "hi here!!", @imageURL%>
+
+          <%if !@imageURL%>
+            <p><%=link_to @winnerID, @imageURL%></p>
+          <%else%>
+            <p><%=@winnerID%>  사진이 없습니다</p>
+          <%end%>
+
+      <% end %> 
+      
+      <p> 위 학우들께는 2-3일 내에 응모하신 번호로 문자드립니다. </p>
+    </div>
+
+  </div>
+</div>
+-->
+
+
+
+
+<!--
+
+<div class="container-fluid">    
+  <div class="row content">
+    
+    <div class="container">
+      <div class="titlel">당첨자 발표</div> 
+    </div>
+
+    <div class="col-8 col-md-10 col-center m-auto text-center" id="winnerbox">
+      <h4 class="lottitle"><br> 축하합니다 :) </h4>
+      <p><% for n in 0..@lotto.winnum.to_i %>
+          <%= $winnerarray[n] %><br>
+        <% end %> 
+      </p>
+
+      <p> 위 학우들께는 2-3일 내에 응모하신 번호로 문자드립니다. </p>
+    </div>
+
+  </div>
+</div>
+-->
+
+<%# confetti 테스트 코드 %>
+<div class="container col-center" id="confetti">
+  <canvas id="canvas"></canvas>
+</div>
+
+<style>
+canvas {
+  position: absolute;
+  margin-left: 60px;
+  bottom: 0;
+  width: 70%;
+}
+
+</style>
+
+<script>
+  const canvasEl = document.querySelector('#canvas');
+
+  const w = canvasEl.width = window.innerWidth ;
+  const h = canvasEl.height = window.innerHeight * 2;
+
+  function loop() {
+    requestAnimationFrame(loop);
+      ctx.clearRect(0,0,w,h);
+  
+    confs.forEach((conf) => {
+      conf.update();
+      conf.draw();
+    })
+  }
+
+  function Confetti () {
+    //construct confetti
+    const colours = ['#fde132', '#009bde', '#ff6b00'];
+  
+    this.x = Math.round(Math.random(10) * w);
+    this.y = Math.round(Math.random(10) * h)-(h/2);
+    this.rotation = Math.random(10)*360;
+
+    const size = Math.random(10)*(w/60);
+    this.size = size < 15 ? 15 : size;
+
+    this.color = colours[Math.round(Math.random(colours.length)*10-1)]
+
+    this.speed = this.size/4;
+  
+    this.opacity = Math.random(10);
+
+    this.shiftDirection = Math.random(10) > 0.5 ? 1 : -1;
+  }
+
+  Confetti.prototype.border = function() {
+    if (this.y >= h) {
+      this.y = h;
+    }
+  }
+
+  Confetti.prototype.update = function() {
+    this.y += this.speed;
+  
+    if (this.y <= h) {
+      this.x += this.shiftDirection/5;
+      this.rotation += this.shiftDirection*this.speed/100;
+    }
+
+    this.border();
+  };
+
+  Confetti.prototype.draw = function() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, this.rotation, this.rotation+(Math.PI/2));
+    ctx.lineTo(this.x, this.y);
+    ctx.closePath();
+    ctx.globalAlpha = this.opacity;
+    ctx.fillStyle = this.color;
+    ctx.fill();
+  };
+
+  const ctx = canvasEl.getContext('2d');
+  const confNum = Math.floor(w / 5);
+  const confs = new Array(confNum).fill().map(_ => new Confetti());
+
+  loop();
+</script>

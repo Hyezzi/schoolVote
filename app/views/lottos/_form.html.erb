@@ -1,0 +1,21 @@
+<%= form_for(lotto) do |f| %>
+  <% if lotto.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(lotto.errors.count, "error") %> prohibited this lotto from being saved:</h2>
+
+      <ul>
+      <% lotto.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  
+   <div class="field">
+     <%= f.label :추첨인원 %> 
+     <%= f.number_field :winnum %> 
+     <%= f.submit class:"btn", name: "결과는?" %>
+  </div>
+
+<% end %>

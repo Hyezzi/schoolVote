@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<style>
+  #box1 {text-align: center; }
+</style>
+
+<div class="container">
+    <div class="howto_bar">
+    </div>
+    <div class="howto_text_title">
+        후원해주신 분들
+    </div>
+<br>
+<table>
+  <thead>
+    <tr>
+      <th><b>이름</b></th>
+      <th><b>후원물품</b></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @hoowons.each do |hoowon| %>
+      <tr>
+        <td><%= hoowon.name %></td>
+        <td><%= hoowon.thing %></td>
+      </tr>
+      <!--  
+        <td><%= link_to 'Show', hoowon %></td>
+        <td><%= link_to 'Edit', edit_hoowon_path(hoowon) %></td>
+        <td><%= link_to 'Destroy', hoowon, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      -->
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<div id='box1'><a href='/hoowon2'><button>후원방법</button></div>
+
+<%# <%= link_to 'New Hoowon', new_hoowon_path %>
