@@ -69,20 +69,6 @@ ActiveRecord::Schema.define(version: 20180804203407) do
     t.string   "image2"
   end
 
-  create_table "pledges", force: :cascade do |t|
-    t.string   "title"
-    t.text     "content"
-    t.text     "content2"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "image"
-    t.string   "title2"
-    t.string   "title3"
-    t.text     "content3"
-    t.string   "image2"
-    t.string   "name"
-  end
-
   create_table "routers", force: :cascade do |t|
     t.string   "name"
     t.string   "placename"
@@ -97,8 +83,6 @@ ActiveRecord::Schema.define(version: 20180804203407) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "log_id"
-    t.index ["log_id"], name: "index_school_dbs_on_log_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -77,10 +77,10 @@
                   <% end %>
               </div>
 
-    <div class="banner_footer navbar fixed-bottom navbar-light">
-      <%= link_to '수정', edit_pledgenewee_path(@pledgenewee), class:"banner_footer_edit"%> |
-      <%= link_to '삭제', @pledgenewee, method: :delete, data: { confirm: '관리자님 지우시겠어요?' }, class:"banner_footer_delete" %> |
-      <%= link_to '뒤로가기', pledgenewees_path, class:"banner_footer_back" %> 
-    </div>
+    <%# <div class="banner_footer navbar fixed-bottom navbar-light">
+      <%= link_to '수정', edit_pledgenewee_path(@pledgenewee), class:"banner_footer_edit"%>
+      <%# <%= link_to '삭제', @pledgenewee, method: :delete, data: { confirm: '관리자님 지우시겠어요?' }, class:"banner_footer_delete" %>
+      <%# <%= link_to '뒤로가기', pledgenewees_path, class:"banner_footer_back" %>
+    <%# </div> %>
   </div>
 </body>

@@ -556,47 +556,60 @@ ul {
     list-style: none;
     }
     .poster_name {
-    font-size: 2.5rem;
+    font-size: 1rem;
     margin-top: 7%;
+    font-family: 'NanumSquareround';
+    text-align: center;
     }
   .poster_image{
     width: 55vw; 
     height: 43.5vh; 
-    margin-top: 3%;
+    margin-top: 5%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .poster_footer{
     height: 5%; 
-    background-color: #7D2222; 
+    background-color:rgba(157,147,247,1); 
     position:relative;
-    font-size: 2rem;
+    font-size: 1rem;
+    font-family: 'NanumSquareround';
   }
 
   .poster_font {
     color: white;
+    font-family: 'NanumSquareround';
   }
 
   .poster_intro {
-    font-size: 2rem;
+    font-size: 1.5rem;
+    font-family: 'NanumSquareround';
   }
 
   .poster_bar {
     margin-top: 10%; 
-    background-color: #7D2222; 
+    background-color:rgba(157,147,247,1); 
     width: 10%; 
     height: 0.35vh;
   }
   .poster_bar2 { 
     margin-bottom: 10%;
-    background-color: #7D2222; 
+    margin-top: 5%;
+    background-color: rgba(157,147,247,1); 
     width: 10%; 
     height: 0.35vh;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 
 // 배너 페이지 CSS
 
     .banner_intro {
       font-size: 2rem;
+      font-family: 'NanumSquareround';
     }
     .banner_image {
       height: auto; 
@@ -604,9 +617,10 @@ ul {
     }
     .banner_footer {
       height: 5%; 
-      background-color: #7D2222; 
+      background-color:rgba(157,147,247,1); 
       position: relative; 
       margin-top: 7%;
+      font-family: 'NanumSquareround';
     }
     
     .banner_footer_edit {
@@ -622,36 +636,37 @@ ul {
     }
 
     .banner_bar0 {
-      background-color: #7D2222; 
+      background-color: rgba(157,147,247,1); 
       width: 10%; 
       height: 0.35vh;
       margin-top: 7%;
     }
 
     .banner_bar1 {
-      background-color: #7D2222; 
+      background-color: rgba(157,147,247,1); 
       width: 10%; 
       height: 0.35vh;
       margin-top: 7%;
     }
 
     .banner_bar2 {
-      background-color: #7D2222; 
+      background-color: rgba(157,147,247,1); 
       width: 10%; 
       height: 0.35vh;
       margin-top: 7%;
     }
 
     .banner_bar3 {
-      background-color: #7D2222; 
+      background-color: rgba(157,147,247,1); 
       width: 10%; 
       height: 0.35vh;
       margin-top: 7%;
     }
 
     .banner_intro {
-        font-size: 2rem;
+        font-size: 1.3rem;
         margin-top: 3%;
+        font-family: 'NanumSquareround';
       }
     .banner_image {
         height: auto; 
@@ -659,80 +674,86 @@ ul {
       }
       .banner_footer {
         height: 5%; 
-        background-color: #7D2222; 
+        background-color: rgba(157,147,247,1); 
         position: relative; 
         margin-top: 7%;
       }
       
       .banner_footer_edit {
         color: white;
-        font-size: 1.5rem;
+        font-size: 1rem;
       }
   
       .banner_footer_delete {
         color: white;
-        font-size: 1.5rem;
+        font-size: 1rem;
       }
   
       .banner_footer_back {
         color: white;
-        font-size: 1.5rem;
+        font-size: 1rem;
       }
   
       .banner_bar0 {
-        background-color: #7D2222; 
+        background-color: rgba(157,147,247,1); 
         width: 10%; 
         height: 0.35vh;
         margin-top: 7%;
       }
   
       .banner_bar1 {
-        background-color: #7D2222; 
+        background-color: rgba(157,147,247,1); 
         width: 10%; 
         height: 0.35vh;
         margin-top: 7%;
       }
   
       .banner_bar2 {
-        background-color: #7D2222; 
+        background-color: rgba(157,147,247,1); 
         width: 10%; 
         height: 0.35vh;
         margin-top: 7%;
       }
   
       .banner_bar3 {
-        background-color: #7D2222; 
+        background-color: rgba(157,147,247,1); 
         width: 10%; 
         height: 0.35vh; 
         margin-top: 7%;
       }
   
       .btn03 {
-        font-size: 2rem;
+        font-size: 1.2rem;
         margin-top: 3%;
+        font-family: 'NanumSquareround';
       }
   
       .btn02 {
-        font-size: 2rem;
+        font-size: 1.2rem;
         margin-top: 3%;
+        font-family: 'NanumSquareround';
       }
   
       .btn01 {
-        font-size: 2rem;
+        font-size: 1.2rem;
         margin-top: 3%;
+        font-family: 'NanumSquareround';
       }
   
       .example03 {
         display: none; 
-        font-size: 1.5rem;
+        font-size: 0.8rem;
+        font-family: 'NanumSquareround';
       }
   
       .example02 {
         display: none; 
-        font-size: 1.5rem;
+        font-size: 0.8rem;
+        font-family: 'NanumSquareround';
       }
   
       .example01 {
         display: none; 
-        font-size: 1.5rem;
+        font-size: 0.8rem;
+        font-family: 'NanumSquareround';
       }
