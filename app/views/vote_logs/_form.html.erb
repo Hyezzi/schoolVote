@@ -68,23 +68,11 @@
   </div>
 <% end %>
  
-<!--file input
-
-<script>
-  $('#vote_log_image').on('change',function(){
-    //get the file name
-    var fileName = $(this).val();
-    console.log("fileName : ", fileName);
-    //replace the "Choose a file" label
-    $(this).next('.custom-file-label').html(fileName);
-    document.getElementByClass('.custom-file-label').html(fileName);
-  })
-</script>
--->
 
 
 
 <script>
+
   document.getElementById("submitButton").disabled = true;
   
   document.getElementById("checkButton").addEventListener("click", function(){

@@ -1,0 +1,98 @@
+@media (max-width: 575.98px) { 
+  
+    .vote-new-image{
+      width: 100%;
+      height: 20vh;
+    }
+    
+    .vote-new-input{
+      outline: none;
+      border: solid 0px;
+      border-bottom: solid grey 2px;
+      text-align: center;
+      width: 50vw;
+  
+      transition: border .8s ease-in-out;
+    }
+  
+  }
+  
+@media (min-width: 1200px) { 
+    .vote-new-image{
+        width: 100%;
+        height: 30vh;
+    }
+
+    .vote-new-input{
+        border: 3px solid transparent;
+        border-width: 0 0 2px 0;
+        -moz-border-image: -moz-linear-gradient(left, rgba(157,147,247,1) 0%, rgba(117,176,247,1) 100%);
+        -webkit-border-image: -webkit-linear-gradient(left, rgba(157,147,247,1) 0%, rgba(117,176,247,1) 100%);
+        border-image: linear-gradient(to right, rgba(157,147,247,1) 0%, rgba(117,176,247,1) 100%);
+        border-image-slice: 1;
+        margin-bottom: 10px;
+
+        text-align: center;
+
+        width: 30vw;
+    }
+
+}
+  
+.vote-new-input:focus{
+position: relative;
+//left: -0.5vw;
+top: -0.5vh;
+outline: none;
+box-shadow: -6px 0 white,         /*Left masking shadow*/
+            6px 0 white,          /*Right masking shadow*/
+            0 2px 2px -1px rgba(157,147,247,1); /*The real (slim) shadow*/
+
+
+border: 3px solid transparent;
+border-width: 0 0 2px 0;
+-moz-border-image: -moz-linear-gradient(left, rgba(157,147,247,1) 0%, rgba(117,176,247,1) 100%);
+-webkit-border-image: -webkit-linear-gradient(left, rgba(157,147,247,1) 0%, rgba(117,176,247,1) 100%);
+border-image: linear-gradient(to right, rgba(157,147,247,1) 0%, rgba(117,176,247,1) 100%);
+border-image-slice: 1;
+//margin-bottom: -0.5vh;
+transition: border .8s ease-in-out;
+        
+
+
+}
+
+.vote-new-input::placeholder {
+color:#cbd0d5;
+font-size: 0.8em;
+}
+
+#check-warning{
+font-size: 0.8em;
+}
+
+
+
+.vote-new-btn-first:hover{
+background-color: rgba(157,147,247,1);
+color: white;
+}
+
+.vote-new-upload{
+background-color: rgba(234,234,234,1);
+}
+
+.back-link{
+color: inherit;
+}
+
+
+.vote-new-btn-first, .vote-new-btn-second{
+background-color: transparent;
+color: rgba(157,147,247,1);
+border: solid rgba(157,147,247,1) 2px;
+border-radius: 100px;
+height: 4.5vh;
+font-size: 0.9em;
+
+}
